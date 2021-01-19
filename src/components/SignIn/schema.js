@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 const MESSAGE_FOR_FILL = 'Fill this field';
 const userInfo = JSON.parse(localStorage.getItem('user'));
-console.log(userInfo.data.password);
 
 const schema = yup.object().shape({
     email:
