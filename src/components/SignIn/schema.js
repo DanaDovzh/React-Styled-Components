@@ -2,6 +2,8 @@ import * as yup from 'yup';
 const MESSAGE_FOR_FILL = 'Fill this field';
 const userInfo = JSON.parse(localStorage.getItem('user'));
 
+const confirmPassword = userInfo ? userInfo.data.password : '';
+console.log(confirmPassword)
 const schema = yup.object().shape({
     email:
         yup.string()
@@ -9,7 +11,7 @@ const schema = yup.object().shape({
     password:
         yup.string()
             .required(MESSAGE_FOR_FILL)
-            .oneOf([userInfo.data.password, null], 'Password must match')
+            .oneOf([confirmPassword, null], 'Password must match')
 
 });
 
