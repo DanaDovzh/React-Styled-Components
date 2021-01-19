@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import '../sign.sass';
-import './sign-up.sass';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useHistory } from 'react-router-dom';
+
 import Input from '../ParstForPage/Input';
 import { validatorNames, validatorEmail, validatorPassword } from '../validator/validators';
 import schema from './schema';
-
 import ButtonSubmit from '../ParstForPage/ButtonSubmit';
 import ButtonText from '../ParstForPage/ButtonText';
 import Heading from '../ParstForPage/Heading';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+
+import '../sign.sass';
+import './sign-up.sass';
 
 function SignUp() {
     const history = useHistory()
@@ -24,7 +25,7 @@ function SignUp() {
         localStorage.setItem('user', JSON.stringify({ data }));
         history.push('./signIn');
     }
-    
+
     return (
         <div className='sign'>
             <Heading>Sign Up</Heading>
