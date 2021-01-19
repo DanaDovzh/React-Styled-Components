@@ -16,6 +16,7 @@ const validatorNames = (e) => {
 
 const validatorEmail = (e) => {
     const valueInput = e.target.value;
+    console.log(valueInput)
     const validator = (valueInput.match(REGEX_EMAIL) ? true : false);
     changeBorder(valueInput, validator);
 }
@@ -26,4 +27,4 @@ const validatorPassword = (e) => {
     changeBorder(valueInput, validator);
 }
 
-export { REGULAR_NOT_NUMBER, validatorNames, validatorEmail, validatorPassword }
+export { REGULAR_NOT_NUMBER, REGEX_PASSWORD, validatorNames, validatorEmail, validatorPassword }

@@ -1,4 +1,4 @@
-import {REGULAR_NOT_NUMBER} from '../validator/validators';
+import {REGULAR_NOT_NUMBER, REGEX_PASSWORD} from '../validator/validators';
 import * as yup from 'yup';
 
 const MESSAGE_FOR_FILL = 'Fill this field';
@@ -20,6 +20,7 @@ const schema = yup.object().shape({
     password:
         yup.string()
             .required(MESSAGE_FOR_FILL)
+            .matches(REGEX_PASSWORD, 'Bad password')
 
 });
 

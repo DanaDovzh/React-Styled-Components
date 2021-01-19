@@ -10,7 +10,7 @@ import Input from '../ParstForPage/Input';
 import ButtonSubmit from '../ParstForPage/ButtonSubmit';
 import ButtonText from '../ParstForPage/ButtonText';
 import Heading from '../ParstForPage/Heading';
-import { validatorEmail, validatorPassword } from '../validator/validators';
+import {REGEX_PASSWORD, validatorEmail, validatorPassword } from '../validator/validators';
 
 import '../sign.sass';
 import './sign-in.sass';
@@ -18,8 +18,11 @@ import './sign-in.sass';
 const MESSAGE_FOR_FILL = 'Fill this field';
 
 function SignIn() {
-    const [confirmPassword, setConfirmPassword] = useState('');
+    
+    const infoUser = JSON.parse(localStorage.getItem('user'));
     const [confirmEmail, setConfirmEmail] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    
     const schema = yup.object().shape({
         email:
             yup.string()
@@ -28,7 +31,8 @@ function SignIn() {
         password:
             yup.string()
                 .required(MESSAGE_FOR_FILL)
-                .oneOf([confirmPassword], 'Password or e-mail do not match')
+                .matches(REGEX_PASSWORD, 'Bad password')
+                .matches([confirmPassword], 'Password or e-mail do not match')
 
     });
     const { register, handleSubmit, errors, watch } = useForm({
@@ -47,9 +51,8 @@ function SignIn() {
         console.log(data);
         setPresent(true);
     }
-
-
-    return (
+    
+      return (
         <>
             {present && <Confetti />}
             <div className='sign'>
@@ -62,7 +65,7 @@ function SignIn() {
                         label='E-mail'
                         name='email'
                         required
-                        onChange={(e) => { validatorEmail(e); setConfirmEmail(e.target.value) }}
+                        onChange={(e) => { validatorEmail(e); setConfirmEmail(infoUser ? infoUser.data.email : '')}}
                         defaultValue={inputRemember ? inputRemember.data.email : ''}
                         error={!!errors.email}
                         helperText={errors?.email?.message}
@@ -73,7 +76,7 @@ function SignIn() {
                         type='password'
                         label='Password'
                         name='password'
-                        onChange={(e) => { validatorPassword(e); setConfirmPassword(e.target.value) }}
+                        onChange={(e) => {validatorPassword(e);  setConfirmPassword(infoUser ? infoUser.data.password : '')}}
                         defaultValue={inputRemember ? inputRemember.data.password : ''}
                         error={!!errors.password}
                         helperText={errors?.password?.message}
