@@ -46,6 +46,8 @@
       "last 1 safari version"
     ]
   },
-"homepage": "http://danadovzh.github.io/React-Styled-Components"
-
+  "homepage": "http://danadovzh.github.io/React-Styled-Components",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
 }
